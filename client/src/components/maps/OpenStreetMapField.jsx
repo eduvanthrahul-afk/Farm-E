@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { ExternalLink, LocateFixed, MapPin, Maximize2, Minus, Moon, Plus, Sun } from 'lucide-react';
 import { locationsApi } from '@/api/index';
+import { addFarmBaseMap } from './mapTiles';
 
 const INDIA_CENTER = [22.9734, 78.6569];
 
@@ -128,10 +129,7 @@ export default function OpenStreetMapField({ value, onChange, onLocationResolved
       zoomControl: false,
       scrollWheelZoom: false,
     });
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    addFarmBaseMap(map);
     if (interactive) {
       map.on('click', (event) => selectPoint([event.latlng.lng, event.latlng.lat]));
     }

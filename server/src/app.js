@@ -53,7 +53,7 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", 'https://accounts.google.com/gsi/client'],
         styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        imgSrc: ["'self'", 'data:', 'blob:', 'https://tile.openstreetmap.org', 'https://*.googleusercontent.com'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://tile.openstreetmap.org', 'https://basemaps.cartocdn.com', 'https://*.googleusercontent.com'],
         connectSrc: ["'self'", 'ws:', 'wss:', 'https://accounts.google.com/gsi/'],
         fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
         frameSrc: ["'self'", 'https://accounts.google.com/gsi/'],
