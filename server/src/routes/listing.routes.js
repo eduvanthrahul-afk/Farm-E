@@ -112,13 +112,13 @@ router.post(
       return res.status(400).json({ success: false, message: `A listing can have up to ${MAX_LISTING_IMAGES} photos` });
     }
 
-    if (config.storage.provider !== 'r2') await fs.mkdir(LISTING_IMAGE_DIR, { recursive: true });
+    if (!config.storage.isRemote) await fs.mkdir(LISTING_IMAGE_DIR, { recursive: true });
     const savedFiles = [];
     try {
       const imagePaths = [];
       for (const file of files) {
         const fileName = `${crypto.randomUUID()}${LISTING_IMAGE_TYPES[file.mimetype]}`;
-        if (config.storage.provider === 'r2') {
+        if (config.storage.isRemote) {
           await objectStorage.putObject({ key: `listings/${fileName}`, body: file.buffer, contentType: file.mimetype });
           savedFiles.push({ fileName, remote: true });
         } else {

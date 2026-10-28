@@ -263,12 +263,12 @@ router.post(
       return res.status(400).json({ success: false, message: 'Evidence cannot be added to a cancelled order' });
     }
 
-    if (config.storage.provider !== 'r2') await fs.promises.mkdir(EVIDENCE_DIR, { recursive: true });
+    if (!config.storage.isRemote) await fs.promises.mkdir(EVIDENCE_DIR, { recursive: true });
     const savedNames = [];
     try {
       for (const file of req.files) {
         const fileName = `${crypto.randomUUID()}${EVIDENCE_MIME_EXTENSIONS[file.mimetype]}`;
-        if (config.storage.provider === 'r2') {
+        if (config.storage.isRemote) {
           await objectStorage.putObject({ key: `order-evidence/${fileName}`, body: file.buffer, contentType: file.mimetype });
         } else {
           await fs.promises.writeFile(path.join(EVIDENCE_DIR, fileName), file.buffer, { flag: 'wx' });
@@ -287,7 +287,7 @@ router.post(
       await order.save();
     } catch (error) {
       await Promise.all(savedNames.map((fileName) => (
-        config.storage.provider === 'r2'
+        config.storage.isRemote
           ? objectStorage.deleteObject(`order-evidence/${fileName}`).catch(() => undefined)
           : fs.promises.unlink(path.join(EVIDENCE_DIR, fileName)).catch(() => undefined)
       )));
@@ -309,7 +309,7 @@ router.get(
     if (!order || !isOrderParticipant(order, req.user)) return notFound(res, 'Evidence not found');
     const evidence = order.evidence.id(req.params.evidenceId);
     if (!evidence) return notFound(res, 'Evidence not found');
-    if (config.storage.provider === 'r2') {
+    if (config.storage.isRemote) {
       let object;
       try {
         object = await objectStorage.getObject(`order-evidence/${path.basename(evidence.fileName)}`);

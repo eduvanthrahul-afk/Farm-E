@@ -14,6 +14,7 @@ mongoUriOptions.set('retryWrites', 'false');
 const mongoUriWithRetryWritesDisabled = `${mongoUriParts[0]}?${mongoUriOptions.toString()}`;
 const corsOriginSetting = process.env.CORS_ORIGIN || process.env.RENDER_EXTERNAL_URL || 'http://localhost:5173';
 const r2AccountId = process.env.R2_ACCOUNT_ID || '';
+const storageProvider = process.env.STORAGE_PROVIDER || 'local';
 
 const config = {
   port: parseInt(process.env.PORT, 10) || 5000,
@@ -53,7 +54,8 @@ const config = {
   },
 
   storage: {
-    provider: process.env.STORAGE_PROVIDER || 'local',
+    provider: storageProvider,
+    isRemote: storageProvider === 'r2' || storageProvider === 'mongodb',
     uploadDir: process.env.UPLOAD_DIR || 'uploads',
     maxFileSize: parseInt(process.env.MAX_FILE_SIZE, 10) || 5 * 1024 * 1024,
     r2: {
@@ -128,22 +130,24 @@ if (config.nodeEnv === 'production') {
   if (process.env.SEED_DEMO_DATA === 'true') {
     throw new Error('SEED_DEMO_DATA cannot be enabled in production');
   }
-  if (config.storage.provider !== 'r2') {
-    throw new Error('Production requires durable object storage. Set STORAGE_PROVIDER=r2 and configure R2 credentials.');
+  if (!['r2', 'mongodb'].includes(config.storage.provider)) {
+    throw new Error('Production requires durable file storage. Set STORAGE_PROVIDER=mongodb or STORAGE_PROVIDER=r2.');
   }
-  for (const [key, value] of Object.entries({
-    R2_ENDPOINT: config.storage.r2.endpoint,
-    R2_BUCKET: config.storage.r2.bucket,
-    R2_ACCESS_KEY_ID: config.storage.r2.accessKeyId,
-    R2_SECRET_ACCESS_KEY: config.storage.r2.secretAccessKey,
-  })) {
-    if (!value) throw new Error(`Missing required env variable for production object storage: ${key}`);
-  }
-  try {
-    const endpoint = new URL(config.storage.r2.endpoint);
-    if (endpoint.protocol !== 'https:') throw new Error('R2_ENDPOINT must use HTTPS');
-  } catch (error) {
-    throw new Error(`Invalid R2_ENDPOINT: ${error.message}`);
+  if (config.storage.provider === 'r2') {
+    for (const [key, value] of Object.entries({
+      R2_ENDPOINT: config.storage.r2.endpoint,
+      R2_BUCKET: config.storage.r2.bucket,
+      R2_ACCESS_KEY_ID: config.storage.r2.accessKeyId,
+      R2_SECRET_ACCESS_KEY: config.storage.r2.secretAccessKey,
+    })) {
+      if (!value) throw new Error(`Missing required environment variable for R2 object storage: ${key}`);
+    }
+    try {
+      const endpoint = new URL(config.storage.r2.endpoint);
+      if (endpoint.protocol !== 'https:') throw new Error('R2_ENDPOINT must use HTTPS');
+    } catch (error) {
+      throw new Error(`Invalid R2_ENDPOINT: ${error.message}`);
+    }
   }
 }
 

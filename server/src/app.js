@@ -107,7 +107,7 @@ if (config.isDev) {
 }
 
 // ─── STATIC FILES ────────────────────────────────────────────────────────────
-if (config.storage.provider === 'r2') {
+if (config.storage.isRemote) {
   app.get('/uploads/listings/:fileName', asyncHandler(async (req, res, next) => {
     const { fileName } = req.params;
     if (!/^[a-f\d-]{36}\.(?:jpg|png|webp)$/i.test(fileName)) return res.sendStatus(404);
