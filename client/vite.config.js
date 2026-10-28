@@ -25,10 +25,12 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: /\.(png|jpg|jpeg|svg|gif|webp)$/,
+            // Keep third-party map tiles out of the image cache. A cached blocked tile
+            // response would otherwise keep a map blank after its key/referrer is fixed.
+            urlPattern: ({ url }) => url.origin === self.location.origin && /\.(png|jpg|jpeg|svg|gif|webp)$/i.test(url.pathname),
             handler: 'CacheFirst',
             options: {
-              cacheName: 'images',
+              cacheName: 'farm-e-images-v2',
               expiration: { maxEntries: 100, maxAgeSeconds: 7 * 24 * 60 * 60 },
             },
           },
