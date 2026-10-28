@@ -81,16 +81,18 @@ const ListingDetail = () => {
       });
       return res.data?.data?.conversation;
     },
-    onSuccess: (conv) => {
+    onSuccess: async (conv) => {
       if (conv?._id) {
+        // Chat may have a cached inbox that predates this conversation. Mark it
+        // stale before navigation so the target is present when Chat selects it.
+        await qc.invalidateQueries({ queryKey: ['conversations'] });
         navigate(`/chat?convId=${conv._id}`);
       } else {
-        navigate('/chat');
+        toast.error('Conversation was created, but its details could not be loaded. Open Messages and try again.');
       }
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || 'Failed to start conversation');
-      navigate('/chat');
     },
   });
 
