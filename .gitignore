@@ -1,0 +1,36 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+client/.env.local
+
+# Dependencies and generated output
+**/node_modules/
+client/dist/
+coverage/
+*.log
+npm-debug.log*
+server/.local-mongo/
+__pycache__/
+.report_assets/
+.report_qa/
+.sample_opening/
+.report_build.py
+.report_fix*.py
+.report_render.py
+.report_update.py
+.expand_report.py
+.fix_report.py
+.format_report.py
+.polish_report.py
+.update_report.py
+/output/
+/Farm-E Project Report*.docx
+/Screenshot *.png
+
+# Local uploads and evidence may contain private user/order data
+server/uploads/
+server/private/

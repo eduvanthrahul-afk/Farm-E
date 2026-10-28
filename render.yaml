@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: farm-e-marketplace
+    runtime: node
+    region: singapore
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci --prefix server --omit=dev && npm ci --prefix client && npm --prefix client run build
+    startCommand: npm --prefix server start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.0
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_MEMORY
+        value: "false"
+      - key: SEED_DEMO_DATA
+        value: "false"
+      - key: STORAGE_PROVIDER
+        value: r2
+      - key: PAYMENT_PROVIDER
+        value: mock
+      - key: EMAIL_PROVIDER
+        value: mock
+      - key: SMS_PROVIDER
+        value: mock
+      - key: MAPS_PROVIDER
+        value: mock
+      - key: LOG_LEVEL
+        value: info
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: TRACE_SIGNING_SECRET
+        sync: false
+      - key: R2_ENDPOINT
+        sync: false
+      - key: R2_BUCKET
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: VITE_GOOGLE_CLIENT_ID
+        sync: false

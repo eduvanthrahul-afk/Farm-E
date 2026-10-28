@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-label="Illustrated fresh tomatoes">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#fff3e9"/><stop offset="1" stop-color="#f1ddcf"/></linearGradient><radialGradient id="fruit" cx="35%" cy="28%"><stop stop-color="#ff8060"/><stop offset="1" stop-color="#c93627"/></radialGradient></defs>
+  <rect width="720" height="440" rx="32" fill="url(#bg)"/><ellipse cx="364" cy="366" rx="235" ry="28" fill="#6c38251c"/>
+  <g fill="url(#fruit)"><circle cx="270" cy="247" r="104"/><circle cx="408" cy="233" r="112"/><circle cx="508" cy="285" r="77"/></g>
+  <g fill="#386b3d"><path d="M267 146l-11-31 29 20 21-30 4 36 34-3-29 25-19-14-24 12-24-11-28 17z"/><path d="M399 127l-10-34 30 22 22-32 3 38 36-3-29 26-23-15-24 14-24-12-29 18z"/><path d="M502 207l-8-28 25 18 18-26 3 31 29-2-23 21-19-12-19 11-20-10-23 14z"/></g>
+  <g fill="#fff" opacity=".28"><ellipse cx="238" cy="208" rx="22" ry="37" transform="rotate(35 238 208)"/><ellipse cx="376" cy="191" rx="23" ry="40" transform="rotate(35 376 191)"/></g>
+</svg>

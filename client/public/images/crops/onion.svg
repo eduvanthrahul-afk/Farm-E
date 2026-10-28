@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-label="Illustrated fresh onions">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#fbf4df"/><stop offset="1" stop-color="#eadbc4"/></linearGradient><linearGradient id="onion" x2="1" y2="1"><stop stop-color="#dba577"/><stop offset="1" stop-color="#9b6448"/></linearGradient></defs>
+  <rect width="720" height="440" rx="32" fill="url(#bg)"/><ellipse cx="361" cy="365" rx="230" ry="27" fill="#57351f1c"/>
+  <g fill="url(#onion)" stroke="#875840" stroke-width="4"><path d="M237 324c-72-53-80-163 2-213 28-17 37-44 43-69 8 29 18 51 45 72 76 59 73 153 11 207-27 24-70 30-101 3z"/><path d="M373 333c-73-51-82-161 0-212 29-18 37-44 43-70 9 29 20 52 47 73 76 59 73 154 10 207-27 23-69 29-100 2z"/><path d="M490 342c-47-35-54-105-1-139 19-12 24-29 28-46 6 20 13 34 30 48 49 38 47 99 6 133-18 15-45 19-63 4z"/></g>
+  <g fill="none" stroke="#f4d2a3" stroke-width="4" opacity=".65"><path d="M280 133c-34 56-27 121-13 193M423 136c-33 57-27 122-12 195M516 218c-18 30-14 65-7 99"/><path d="M305 145c30 61 34 118 27 171M447 148c30 62 33 117 26 171"/></g>
+  <g fill="#63804d"><path d="M282 81c-17-37-13-63-1-76 23 22 19 49 1 76z"/><path d="M300 94c2-43 20-65 39-70 6 33-12 56-39 70z"/><path d="M424 94c-16-36-12-62 0-75 22 22 18 49 0 75z"/><path d="M443 105c3-42 20-64 39-69 7 32-11 56-39 69z"/></g>
+</svg>

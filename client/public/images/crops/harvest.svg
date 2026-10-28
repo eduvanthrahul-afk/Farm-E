@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-label="Illustrated fresh farm harvest">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#edf3e2"/><stop offset="1" stop-color="#d9e6d0"/></linearGradient><linearGradient id="basket" x2="0" y2="1"><stop stop-color="#c7985a"/><stop offset="1" stop-color="#90623b"/></linearGradient></defs>
+  <rect width="720" height="440" rx="32" fill="url(#bg)"/><circle cx="584" cy="101" r="44" fill="#e6bb65" opacity=".5"/><path d="M0 315c120-57 214-38 322-3s232 40 398-13v141H0z" fill="#b7ca9a" opacity=".75"/>
+  <path d="M190 228h342l-36 137H226z" fill="url(#basket)"/><path d="M219 238l29 117M290 236l16 122M367 235l-2 125M443 235l-20 124M508 235l-29 119" stroke="#e6c48e" stroke-width="9" opacity=".8"/><path d="M210 229c30-60 272-59 303 0" fill="none" stroke="#a97946" stroke-width="17" stroke-linecap="round"/>
+  <g fill="#527844"><path d="M254 217c-10-84 37-128 99-138-3 65-39 117-99 138z"/><path d="M319 218c2-98 54-142 119-146-10 69-52 123-119 146z"/><path d="M385 218c24-89 82-119 143-105-26 63-76 103-143 105z"/></g>
+  <g fill="#d84d39"><circle cx="270" cy="216" r="31"/><circle cx="415" cy="212" r="31"/></g><g fill="#edb54b"><circle cx="354" cy="211" r="29"/><circle cx="480" cy="218" r="24"/></g>
+</svg>
