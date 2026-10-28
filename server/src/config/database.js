@@ -9,6 +9,11 @@ const path = require('path');
 let isConnected = false;
 let memServer = null;
 
+const safeErrorDetails = (error) => {
+  const message = String(error?.message || error || 'Unknown MongoDB error');
+  return message.replace(/mongodb(?:\+srv)?:\/\/[^\s'\"]+/gi, '[MongoDB connection string redacted]');
+};
+
 /**
  * In development with no MONGO_URI, spin up mongodb-memory-server automatically.
  * In production, always use MONGO_URI (exit on failure).
@@ -37,7 +42,7 @@ const connectDB = async () => {
     try {
       await startMemoryServer();
     } catch (memErr) {
-      logger.warn('mongodb-memory-server unavailable:', memErr.message);
+      logger.warn(`mongodb-memory-server unavailable: ${safeErrorDetails(memErr)}`);
     }
   }
 
@@ -62,11 +67,11 @@ const connectDB = async () => {
     });
 
     mongoose.connection.on('error', (err) => {
-      logger.error('MongoDB error:', err.message);
+      logger.error(`MongoDB error: ${safeErrorDetails(err)}`);
     });
 
   } catch (err) {
-    logger.error('MongoDB connection failed:', err.message);
+    logger.error(`MongoDB connection failed: ${safeErrorDetails(err)}`);
     if (config.nodeEnv === 'production') process.exit(1);
 
     if (!memServer) {
@@ -81,7 +86,7 @@ const connectDB = async () => {
         logger.info(`MongoDB connected (memory fallback): ${conn.connection.host}`);
         return;
       } catch (memErr) {
-        logger.warn('Memory MongoDB fallback failed:', memErr.message);
+        logger.warn(`Memory MongoDB fallback failed: ${safeErrorDetails(memErr)}`);
       }
     }
 
